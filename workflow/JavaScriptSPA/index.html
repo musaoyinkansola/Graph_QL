@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Quickstart | MSAL.JS Vanilla JavaScript SPA</title>
+
+    <!-- msal.js with a fallback to backup CDN -->
+    <script type="text/javascript" src="https://alcdn.msauth.net/lib/1.2.1/js/msal.js" integrity="sha384-9TV1245fz+BaI+VvCjMYL0YDMElLBwNS84v3mY57pXNOt6xcUYch2QLImaTahcOP" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+        if (typeof Msal === 'undefined') document.write(unescape("%3Cscript src='https://alcdn.msftauth.net/lib/1.2.1/js/msal.js' type='text/javascript' integrity='sha384-m/3NDUcz4krpIIiHgpeO0O8uxSghb+lfBTngquAo2Zuy2fEF+YgFeP08PWFo5FiJ' crossorigin='anonymous'%3E%3C/script%3E"));
+    </script>
+
+    <!-- adding Bootstrap 4 for UI components  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <a class="navbar-brand" href="/">New Requisition Request</a>
+        <!-- <div class="btn-group ml-auto dropleft">
+            <button type="button" id="signIn" class="btn btn-secondary" onclick="signIn()">Sign In</button>
+        </div> -->
+    </nav>
+    <br>
+    <br>
+    <div class="row">
+        <div id="card-div" class="col-md-9 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form id="form">
+
+
+                        <div class="form-group">
+                            <label class="form-label" for="request">Request:</label>
+                            <select class="form-control" id="request">
+                <option>New Requsition Request</option>
+              </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Project Purpose">Project Purpose:</label>
+                            <input class="form-control" type="text" id="purpose" placeholder="Project Purpose">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="Name of Vendor">Name of Vendor:</label>
+                            <input class="form-control" type="text" id="vendorname" placeholder="Name of Vendor">
+                        </div>
+                        <div class="form-group">
+                            <label for="Vendor's Account Name">Vendor's Account Name:</label>
+                            <input class="form-control" type="text" id="accountname" placeholder="Vendor's Account Name">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="Vendor's Account Name">Vendor's Account Number:</label>
+                            <input class="form-control" type="text" id="accountnumber" placeholder="Vendor's Account Number">
+                        </div>
+                        <!-- BANK SELECTION -->
+
+                        <div class="form-group">
+                            <label for="Vendor's Bank Name">Vendor's Bank Name:</label>
+                            <select class="payment-term form-control" id="bankname">
+                <option selected hidden>Select Payment Term</option>
+                <option>ACCESS BANK PLC</option>
+                <option>FIDELITY BANK PLC</option>
+              </select>
+
+                        </div>
+
+                        <!-- PAYMENT TERM SELECTION-->
+                        <div class="form-group">
+                            <label for="Payment Term">Payment Term: </label>
+                            <select class="form-control" id="paymentterm">
+                <option selected hidden>Select Payment Term</option>
+                <option>Advance Payment</option>
+                <option>Payment After Service</option>
+              </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="Advance Payment">Advance Payment:</label>
+                            <input class="form-control" type="text" id="advance" placeholder="Enter Amount">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Total Invoice Amount">Total Invoice Amount:</label>
+                            <input class="form-control" type="text" id="invoice" placeholder=" Enter Amount">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="Payment Date">Payment Date:</label>
+                            <input class="form-control" type="date" id="date" title="Submitdate">
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Authorizer">Authorizer:</label>
+                            <input class="form-control" type="email" id="authorizer" placeholder="Enter email address" |email>
+                        </div>
+                        <div class="form-group">
+                            <label for="Attach Invoice">Attach Invoice:</label>
+                            <input class="form-control" type="file" id="file" multiple>
+                        </div>
+                        <!--BUTTON-->
+                        <button id="btn_submit" class="btn btn-primary">submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- importing bootstrap.js and supporting js libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <!-- importing app scripts (load order is important) -->
+    <!-- <script type="text/javascript" src="./authConfig.js"></script>
+    <script type="text/javascript" src="./graphConfig.js"></script> -->
+
+    <!-- replace next line with authRedirect.js if you would like to use the redirect flow -->
+    <!-- <script type="text/javascript" src="./authRedirect.js"></script>   -->
+    <!-- <script type="text/javascript" src="./authPopup.js"></script> -->
+    <script type="text/javascript" src="./graph.js"></script>
+</body>
+
+</html>

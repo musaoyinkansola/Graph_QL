@@ -1,0 +1,2 @@
+Run npm install in other to install all dependecies.
+and also install node.js on your machine
